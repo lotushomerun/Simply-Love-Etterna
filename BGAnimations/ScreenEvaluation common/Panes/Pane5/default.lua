@@ -21,6 +21,8 @@ local abbreviations = {
 	ITG = { "Fan", "Ex", "Gr", "Dec", "WO" },
 	["FA+"] = { "Fan", "Fan", "Ex", "Gr", "Dec" },
 }
+-- ["EO"] = { "Mar", "Per", "Gr", "Gd", "Bad" },
+
 
 local colors = {}
 for w=num_judgments_available,1,-1 do

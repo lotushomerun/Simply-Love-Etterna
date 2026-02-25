@@ -695,7 +695,8 @@ local Overrides = {
 
 			-- First determine the set of actual enabled windows.
 			local windows = {true,true,true,true,true}
-			local disabledWindows = playeroptions:GetDisabledTimingWindows()
+			-- local disabledWindows = playeroptions:GetDisabledTimingWindows()
+			local disabledWindows = {["asd", false]}
 			for w in ivalues(disabledWindows) do
 				windows[tonumber(ToEnumShortString(w):sub(-1))] = false
 			end

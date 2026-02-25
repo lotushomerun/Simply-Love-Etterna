@@ -14,9 +14,7 @@ local song_stats = ("%i %s %i %s"):format(
 	SONGMAN:GetNumSongs(),
 	THEME:GetString("ScreenTitleMenu", "songs in"),
 	SONGMAN:GetNumSongGroups(),
-	THEME:GetString("ScreenTitleMenu", "groups"),
-	-- #SONGMAN:GetAllCourses(PREFSMAN:GetPreference("AutogenGroupCourses")),
-	-- THEME:GetString("ScreenTitleMenu", "courses")
+	THEME:GetString("ScreenTitleMenu", "groups")
 )
 
 -- Checks if there is later version than curVersion

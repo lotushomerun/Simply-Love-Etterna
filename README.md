@@ -16,7 +16,7 @@ https://www.youtube.com/watch?v=OtcWy5m6-CQ
 
 ## Supported Versions of Etterna
 
-The current release of Simply Love is compatible with current Etterna versions **0.74.4** or newer.
+The current release of Simply Love is compatible with current Etterna versions **0.74.0** or newer.
 
 
 **Incompatible Versions**<br>
