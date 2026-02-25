@@ -1,13 +1,22 @@
 local TextColor = (ThemePrefs.Get("RainbowMode") and (not HolidayCheer()) and Color.Black) or Color.White
 
 -- generate a string like "7741 songs in 69 groups, 10 courses"
-local song_stats = ("%i %s %i %s, %i %s"):format(
+-- local song_stats = ("%i %s %i %s, %i %s"):format(
+-- 	SONGMAN:GetNumSongs(),
+-- 	THEME:GetString("ScreenTitleMenu", "songs in"),
+-- 	SONGMAN:GetNumSongGroups(),
+-- 	THEME:GetString("ScreenTitleMenu", "groups"),
+-- 	#SONGMAN:GetAllCourses(PREFSMAN:GetPreference("AutogenGroupCourses")),
+-- 	THEME:GetString("ScreenTitleMenu", "courses")
+-- )
+
+local song_stats = ("%i %s %i %s"):format(
 	SONGMAN:GetNumSongs(),
 	THEME:GetString("ScreenTitleMenu", "songs in"),
 	SONGMAN:GetNumSongGroups(),
 	THEME:GetString("ScreenTitleMenu", "groups"),
-	#SONGMAN:GetAllCourses(PREFSMAN:GetPreference("AutogenGroupCourses")),
-	THEME:GetString("ScreenTitleMenu", "courses")
+	-- #SONGMAN:GetAllCourses(PREFSMAN:GetPreference("AutogenGroupCourses")),
+	-- THEME:GetString("ScreenTitleMenu", "courses")
 )
 
 -- Checks if there is later version than curVersion

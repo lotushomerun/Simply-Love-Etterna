@@ -125,7 +125,7 @@ local GlobalDefaults = {
 			}
 			self.Stages = {
 				PlayedThisGame = 0,
-				Remaining = PREFSMAN:GetPreference("SongsPerPlay"),
+				Remaining = math.huge,
 				Stats = {}
 			}
 			self.ScreenAfter = {

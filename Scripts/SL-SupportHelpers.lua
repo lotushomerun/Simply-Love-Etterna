@@ -72,6 +72,11 @@ function IsITGmania()
 	return ProductFamily() == "ITGmania"
 end
 
+function IsEtterna()
+	if type(ProductFamily) ~= "function" then return false end
+	return ProductFamily() == "Etterna"
+end
+
 -- define the required version here
 local MinimumVersion = {1, 2, 0}
 
@@ -79,10 +84,11 @@ local MinimumVersion = {1, 2, 0}
 -- use StepManiaVersionIsSupported() to check if Simply Love supports the version of SM5 in use
 
 StepManiaVersionIsSupported = function()
-	-- SM5.0.12, SM5.1.x and OutFox are no longer supported
-	-- ITGmania >= 0.8.0
-	if IsITGmania() then
-		return IsMinimumProductVersion(MinimumVersion[1], MinimumVersion[2], MinimumVersion[3])
+	-- This is a port for Etterna.
+	-- ITGmania, SM5.0.12, SM5.1.x and OutFox are not supported
+	--  >= 0.74.0
+	if IsEtterna() then
+		return IsMinimumProductVersion(0, 74, 0)
 	end
 
 	return false
