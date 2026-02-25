@@ -1,31 +1,29 @@
-# Simply Love (ITGmania)
+# Simply Love (Etterna)
 
 ![Arrow Logo](https://i.imgur.com/oZmxyGo.png)
 
+**PLEASE NOTE THAT THIS PROJECT IS A WORK IN PROGRESS AND MOST LIKELY DOESN'T EVEN WORK IN ITS CURRENT STATE**
 
 ## About
 
-Simply Love is an ITGmania theme for the post-ITG community.
+Simply Love is a Stepmania 5 theme for the post-ITG community, now ported to Etterna for the KB community.
 
-It features a clean and simple design, offers numerous data-driven features not implemented by the ITGmania engine, and allows the current generation of ITG fans to breathe new life into the game they've known for over a two decades.
+It features a clean and simple design, offers numerous data-driven features not implemented by the Stepmania engine, and allows the current generation of Etterna fans to breathe new life into the fork they've known for almost a decade.
 
 Simply Love was originally designed and implemented for a previous version of StepMania (SM3.95) by hurtpiggypig.  For more information on that version of Simply Love, check here:
 https://www.youtube.com/watch?v=OtcWy5m6-CQ
 
 
-## Supported Versions of ITGmania
+## Supported Versions of Etterna
 
-The current release of Simply Love is compatible with current ITGmania versions **0.8.0** or newer.
-
-For new installations we currently recommend grabbing the ITGmania + Simply Love bundle over at the
-[www.itgmania.com](https://www.itgmania.com).
+The current release of Simply Love is compatible with current Etterna versions **0.74.4** or newer.
 
 
 **Incompatible Versions**<br>
 ❌ StepMania 5 (SM5)<br>
-❌ Forks of SM5 (e.g. *starworlds*)<br>
-❌ Older versions of StepMania (e.g. StepMania 3.9)<br>
-❌ Forks of older versions of StepMania (e.g. OpenITG, NotITG)<br>
+❌ Forks of SM5 (e.g. *Project OutFox*, *ITGmania*, *PIU PULSE*)<br>
+❌ Older versions of StepMania (e.g. *StepMania 3.9*)<br>
+❌ Forks of older versions of StepMania (e.g. *OpenITG, NotITG*)<br>
 ❌ SM5.2
 
 
@@ -33,7 +31,7 @@ For new installations we currently recommend grabbing the ITGmania + Simply Love
 
 If you are upgrading from a previous version of Simply Love, fully delete the old Simply Love folder first.  **Do not merge the new folder into the old.**
 
-You can download the current Simply Love release at the [Latest Release](https://github.com/Simply-Love/Simply-Love-SM5/releases/latest) page.
+You can download the current Simply Love release at the [Latest Release](https://github.com/lotushomerun/Simply-Love-Etterna/releases/latest) page.
 
 Full install instructions are in the [Installing Simply Love](./Other/Documentation/InstallingSimplyLove-README.md) README.
 
