@@ -128,21 +128,24 @@ return LoadFont("Wendy/_wendy monospace numbers")..{
 			end
 		end
 	end,
-	JudgmentMessageCommand=function(self)
+	JudgmentMessageCommand=function(self, msg)
 		self:queuecommand("RedrawScore")
+		-- local dance_points = pss:GetPercentDancePoints()
+		local percent = msg.WifePercent
+		self:settext(string.format("%03.2f",percent))
 	end,
-	RedrawScoreCommand=function(self)
-		if not IsEX then
-			local dance_points = pss:GetPercentDancePoints()
-			local percent = FormatPercentScore( dance_points ):sub(1,-2)
-			self:settext(percent)
-		end
-	end,
-	ExCountsChangedMessageCommand=function(self, params)
-		if params.Player ~= player then return end
+	-- RedrawScoreCommand=function(self)
+	-- 	if not IsEX then
+	-- 		local dance_points = pss:GetPercentDancePoints()
+	-- 		local percent = FormatPercentScore( dance_points ):sub(1,-2)
+	-- 		self:settext(percent)
+	-- 	end
+	-- end,
+	-- ExCountsChangedMessageCommand=function(self, params)
+	-- 	if params.Player ~= player then return end
 
-		if IsEX then
-			self:settext(("%.02f"):format(params.ExScore))
-		end
-	end,
+	-- 	if IsEX then
+	-- 		self:settext(("%.02f"):format(params.ExScore))
+	-- 	end
+	-- end,
 }

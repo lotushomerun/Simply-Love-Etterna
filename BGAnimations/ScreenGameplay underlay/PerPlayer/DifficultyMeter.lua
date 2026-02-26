@@ -13,7 +13,7 @@ return Def.ActorFrame{
 	-- colored background for player's chart's difficulty meter
 	Def.Quad{
 		InitCommand=function(self)
-			self:zoomto(30, 30)
+			self:zoomto(60, 30)
 		end,
 		CurrentSongChangedMessageCommand=function(self) self:queuecommand("Begin") end,
 		BeginCommand=function(self)
@@ -34,10 +34,10 @@ return Def.ActorFrame{
 		CurrentSongChangedMessageCommand=function(self) self:queuecommand("Begin") end,
 		BeginCommand=function(self)
 			local steps = GAMESTATE:GetCurrentSteps(player)
-			local meter = steps:GetMeter()
+			local meter = steps:GetMSD(getCurRateValue(),1)
 
 			if meter then
-				self:settext(meter)
+				self:settext(string.format("%05.2f",meter))
 			end
 		end
 	}

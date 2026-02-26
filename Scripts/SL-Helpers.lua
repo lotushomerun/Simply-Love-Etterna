@@ -786,8 +786,8 @@ GetColumnMapping = function(player)
 	local left = po:Left()
 	local right = po:Right()
 	local mirror = po:Mirror()
-	local udmirror = po:UDMirror()
-	local lrmirror = po:LRMirror()
+	-- local udmirror = po:UDMirror()
+	-- local lrmirror = po:LRMirror()
 
 	-- Combining flip and invert results in unusual spacing so ignore it.
 	if flip and invert then
@@ -832,13 +832,13 @@ GetColumnMapping = function(player)
 		column_mapping = {column_mapping[4], column_mapping[3], column_mapping[2], column_mapping[1]}
 	end
 
-	if udmirror then
-		column_mapping = {column_mapping[1], column_mapping[3], column_mapping[2], column_mapping[4]}
-	end
+	-- if udmirror then
+	-- 	column_mapping = {column_mapping[1], column_mapping[3], column_mapping[2], column_mapping[4]}
+	-- end
 
-	if lrmirror then
-		column_mapping = {column_mapping[4], column_mapping[2], column_mapping[3], column_mapping[1]}
-	end
+	-- if lrmirror then
+	-- 	column_mapping = {column_mapping[4], column_mapping[2], column_mapping[3], column_mapping[1]}
+	-- end
 
 	if num_columns == 8 then
 		for i=1,4 do

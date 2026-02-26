@@ -91,7 +91,7 @@ af[#af+1] = LoadActor("./DarkBackground.lua", {player, header_height, sidepane_w
 			end
 		end,
 
-		LoadActor("./Banner.lua", player),
+		-- LoadActor("./Banner.lua", player),
 		LoadActor("./TapNoteJudgments.lua", {player, true}), -- second argument is if it has labels or not
 		LoadActor("./HoldsMinesRolls.lua", player),
 		LoadActor("./Time.lua", player),

@@ -903,7 +903,8 @@ local OptionRowDefault = {
 			self.SelectType = Overrides[name].SelectType or "SelectOne"
 			self.OneChoiceForAllPlayers = Overrides[name].OneChoiceForAllPlayers or false
 			self.ExportOnChange = Overrides[name].ExportOnChange or false
-			self.EnabledForPlayers = Overrides[name].EnabledForPlayers or function() return {PLAYER_1, PLAYER_2} end
+			-- self.EnabledForPlayers = Overrides[name].EnabledForPlayers or function() return {PLAYER_1, PLAYER_2} end
+			self.EnabledForPlayers = {PLAYER_1}
 			self.ReloadRowMessages = Overrides[name].ReloadRowMessages or {}
 			self.BroadcastOnExport = Overrides[name].BroadcastOnExport or {}
 			

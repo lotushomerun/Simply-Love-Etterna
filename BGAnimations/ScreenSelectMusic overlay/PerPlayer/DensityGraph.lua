@@ -77,7 +77,6 @@ af[#af+1] = Def.ActorFrame{
 		-- self:queuecommand("ParseChart")
 	end,
 	["CurrentStepsChangedMessageCommand"]=function(self)
-		print("step")
 		self:queuecommand("Hide")
 		self:stoptweening()
 		self:sleep(0.4)

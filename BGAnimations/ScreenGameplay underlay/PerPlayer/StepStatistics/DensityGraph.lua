@@ -95,7 +95,7 @@ local histogram_amv = Scrolling_NPS_Histogram(player, width, height)..{
 local text = LoadFont("Common Normal")..{
 	InitCommand=function(self)
 		if style ~= "double" then
-			self:halign(PlayerNumber:Reverse()[OtherPlayer[player]]):zoom(0.9)
+			self:halign(1):zoom(0.9)
 		else
 			self:halign(3.4):zoom(0.9)
 		end

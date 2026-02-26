@@ -166,8 +166,8 @@ af.CurrentSongChangedMessageCommand=function(self,params)
 	--
 	-- When the 3rd song appears, we'll index cumulative_seconds[2] to get (1st song + 2nd song)
 	-- duration.  Etc.
-	local course_index = GAMESTATE:GetCourseSongIndex()
-	seconds_offset = cumulative_seconds[course_index] or 0
+	-- local course_index = GAMESTATE:GetCourseSongIndex()
+	seconds_offset = 0
 end
 
 -- -----------------------------------------------------------------------
