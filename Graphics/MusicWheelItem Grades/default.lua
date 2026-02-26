@@ -43,7 +43,7 @@ return Def.ActorFrame{
 	LoadActor("GetLamp.lua"),
 
 	Def.Sprite{
-		Texture=THEME:GetPathG("MusicWheelItem","Grades/grades 1x19.png"),
+		Texture=THEME:GetPathG("MusicWheelItem","Grades/grades 1x18.png"),
 		InitCommand=function(self) self:zoom( SL_WideScale(0.18, 0.3) ):animate(false) end,
 
 		-- "SetGrade" is broadcast by the engine in MusicWheelItem.cpp.
