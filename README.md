@@ -26,6 +26,12 @@ The current release of Simply Love is compatible with current Etterna versions *
 ❌ Forks of older versions of StepMania (e.g. *OpenITG, NotITG*)<br>
 ❌ SM5.2
 
+**Alternative Versions**<br>
+- **Etterna**: *You are here*
+- **OutFox**: https://github.com/Tiny-Foxes/Simply-Love-OutFox
+- **ITGMania**: 
+- **StepMania 5**: 
+
 
 ## Installing Simply Love
 

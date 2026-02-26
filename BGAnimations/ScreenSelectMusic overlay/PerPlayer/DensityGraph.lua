@@ -74,8 +74,10 @@ af[#af+1] = Def.ActorFrame{
 	-- below.
 	CurrentSongChangedMessageCommand=function(self)
 		self:queuecommand("Hide")
+		-- self:queuecommand("ParseChart")
 	end,
-	["CurrentSteps"..pn.."ChangedMessageCommand"]=function(self)
+	["CurrentStepsChangedMessageCommand"]=function(self)
+		print("step")
 		self:queuecommand("Hide")
 		self:stoptweening()
 		self:sleep(0.4)
@@ -242,12 +244,12 @@ af2[#af2+1] = Def.ActorFrame{
 local af3 = af2[#af2]
 
 local layout = {
-	{"Crossovers", "Footswitches"},
-	{"Sideswitches", "Jacks"},
-	{"Brackets", "Total Stream"},
+	{"Stream", "Jumpstream", "Handstream"},
+	{"Stamina", "JackSpeed", "Chordjack"},
+	{"Technical", "Overall"},
 }
 
-local colSpacing = 150
+local colSpacing = 90
 local rowSpacing = 20
 local noneText = THEME:GetString("SLPlayerOptions", "None")
 local totalStreamText = THEME:GetString("SLPlayerOptions", "TotalStream")
@@ -277,7 +279,8 @@ for i, row in ipairs(layout) do
 			end,
 			RedrawCommand=function(self)
 				if col ~= "Total Stream" then
-					self:settext(SL[pn].Streams[col])
+					self:settext(string.format("%05.2f", SL[pn].Streams[col]))
+		            self:diffuse(COLORS:colorByMSD(SL[pn].Streams[col]))
 				else
 					local streamMeasures, breakMeasures = GetTotalStreamAndBreakMeasures(pn)
 					local totalMeasures = streamMeasures + breakMeasures
@@ -295,7 +298,7 @@ for i, row in ipairs(layout) do
 			Name=col,
 			InitCommand=function(self)
 				local textHeight = 17
-				local textZoom = 0.8
+				local textZoom = 0.55
 				self:maxwidth(width/textZoom):zoom(textZoom):horizalign(left)
 				self:xy(-width/2 + 50, -height/2 + 13)
 				self:addx((j-1)*colSpacing)

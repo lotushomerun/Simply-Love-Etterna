@@ -75,11 +75,14 @@ local PlayerDefaults = {
 				columnCues = {},
 				Hash = '',
 
-				Crossovers = 0,
-				Footswitches = 0,
-				Sideswitches = 0,
-				Jacks = 0,
-				Brackets = 0,
+				Stream = 0.0,
+				Jumpstream = 0.0,
+				Handstream = 0.0,
+				Stamina = 0.0,
+				JackSpeed = 0.0,
+				Chordjack = 0.0,
+				Technical = 0.0,
+				Overall = 0.0,
 
 				-- Data for measure counter. Populated in ./ScreenGameplay in/MeasureCounterAndMods.lua.
 				-- Uses the notesThreshold option.

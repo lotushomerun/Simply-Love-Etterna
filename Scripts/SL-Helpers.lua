@@ -344,8 +344,8 @@ SetGameModePreferences = function()
 
 		-- Now that we've set the SL table for TimingWindows appropriately,
 		-- use it to apply TimingWindows.
-		local TW_OptRow = CustomOptionRow( "TimingWindows" )
-		TW_OptRow:LoadSelections( TW_OptRow.Choices, player )
+		-- local TW_OptRow = CustomOptionRow( "TimingWindows" )
+		-- TW_OptRow:LoadSelections( TW_OptRow.Choices, player )
 
 
 		local player_modslevel = GAMESTATE:GetPlayerState(player):GetPlayerOptions("ModsLevel_Preferred")

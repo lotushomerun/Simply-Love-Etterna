@@ -660,7 +660,7 @@ local Overrides = {
 					mods.VisualDelay = self.Choices[i]
 				end
 			end
-			playeroptions:VisualDelay( mods.VisualDelay:gsub("ms","")/1000 )
+			-- playeroptions:VisualDelay( mods.VisualDelay:gsub("ms","")/1000 )
 		end
 	},
 	-------------------------------------------------------------------------
@@ -696,7 +696,7 @@ local Overrides = {
 			-- First determine the set of actual enabled windows.
 			local windows = {true,true,true,true,true}
 			-- local disabledWindows = playeroptions:GetDisabledTimingWindows()
-			local disabledWindows = {["asd", false]}
+			local disabledWindows = ""
 			for w in ivalues(disabledWindows) do
 				windows[tonumber(ToEnumShortString(w):sub(-1))] = false
 			end
@@ -721,7 +721,7 @@ local Overrides = {
 			-- to a known value (all windows enabled).
 			if not matched then
 				mods.TimingWindows = {true,true,true,true,true}
-				playeroptions:ResetDisabledTimingWindows()
+				-- playeroptions:ResetDisabledTimingWindows()
 				list[1] = true
 			end
 			return list
@@ -731,10 +731,10 @@ local Overrides = {
 			for i=1,#list do
 				if list[i] then
 					mods.TimingWindows = self.Values[i]
-					playeroptions:ResetDisabledTimingWindows()
+					-- playeroptions:ResetDisabledTimingWindows()
 					for i,enabled in ipairs(mods.TimingWindows) do
 						if not enabled then
-							playeroptions:DisableTimingWindow("TimingWindow_W"..i)
+							-- playeroptions:DisableTimingWindow("TimingWindow_W"..i)
 						end
 					end
 				end
@@ -814,7 +814,7 @@ local Overrides = {
 		end,
 		OneChoiceForAllPlayers = true,
 		SaveSelections = function(self, list, pn)
-			if list[1] then SL.Global.ScreenAfter.PlayerOptions = Branch.GameplayScreen() end
+			if list[1] then SL.Global.ScreenAfter.PlayerOptions = "ScreenGameplay" end
 
 			if SL.Global.MenuTimer.ScreenSelectMusic > 1 and SL.Global.MusicWheelLocked == false then
 				if list[2] then SL.Global.ScreenAfter.PlayerOptions = SelectMusicOrCourse() end
@@ -835,7 +835,7 @@ local Overrides = {
 		end,
 		OneChoiceForAllPlayers = true,
 		SaveSelections = function(self, list, pn)
-			if list[1] then SL.Global.ScreenAfter.PlayerOptions2 = Branch.GameplayScreen() end
+			if list[1] then SL.Global.ScreenAfter.PlayerOptions2 = "ScreenGameplay" end
 
 			if SL.Global.MenuTimer.ScreenSelectMusic > 1 and SL.Global.MusicWheelLocked == false then
 				if list[2] then SL.Global.ScreenAfter.PlayerOptions2 = SelectMusicOrCourse() end
@@ -857,7 +857,7 @@ local Overrides = {
 		end,
 		OneChoiceForAllPlayers = true,
 		SaveSelections = function(self, list, pn)
-			if list[1] then SL.Global.ScreenAfter.PlayerOptions3 = Branch.GameplayScreen() end
+			if list[1] then SL.Global.ScreenAfter.PlayerOptions3 = "ScreenGameplay" end
 
 			if SL.Global.MenuTimer.ScreenSelectMusic > 1 and SL.Global.MusicWheelLocked == false then
 				if list[2] then SL.Global.ScreenAfter.PlayerOptions3 = SelectMusicOrCourse() end

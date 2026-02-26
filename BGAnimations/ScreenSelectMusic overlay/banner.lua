@@ -27,7 +27,7 @@ t[#t+1] = Def.Sprite{
 	SetCommand=function(self)
 		-- if ShowBanners preference is false, always just show the fallback banner
 		-- don't bother assessing whether to draw or not draw
-		if PREFSMAN:GetPreference("ShowBanners") == false then return end
+		-- if PREFSMAN:GetPreference("ShowBanners") == false then return end
 
 		if SongOrCourse and SongOrCourse:HasBanner() then
 			self:visible(false)
@@ -37,15 +37,41 @@ t[#t+1] = Def.Sprite{
 	end
 }
 
-if PREFSMAN:GetPreference("ShowBanners") then
-	t[#t+1] = Def.ActorProxy{
-		Name="BannerProxy",
-		BeginCommand=function(self)
-			local banner = SCREENMAN:GetTopScreen():GetChild('Banner')
-			self:SetTarget(banner)
+-- if PREFSMAN:GetPreference("ShowBanners") then
+	-- t[#t+1] = Def.ActorProxy{
+	-- 	Name="BannerProxy",
+	-- 	BeginCommand=function(self)
+	-- 		local banner = SCREENMAN:GetTopScreen():GetChild('Banner')
+	-- 		self:SetTarget(banner)
+	-- 	end
+	-- }
+-- end
+
+t[#t+1] = Def.Sprite{
+	Name="Banner",
+	InitCommand=function(self) self:setsize(bannerWidth, bannerHeight) end,
+
+	CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end,
+	CurrentCourseChangedMessageCommand=function(self) self:playcommand("Set") end,
+
+	SetCommand=function(self)
+		-- if ShowBanners preference is false, always just show the fallback banner
+		-- don't bother assessing whether to draw or not draw
+		-- if PREFSMAN:GetPreference("ShowBanners") == false then return end
+
+		if SongOrCourse and SongOrCourse:HasBanner() then
+			self:Load(SongOrCourse:GetBannerPath())
+			self:setsize(bannerWidth, bannerHeight)
+			self:visible(true)
+		else
+			
+			-- self:Load(GHETTOGAMESTATE.lastSelectedFolder:GetBannerPath())
+			self:setsize(bannerWidth, bannerHeight)
+			self:visible(false)
+			-- self:visible(false)
 		end
-	}
-end
+	end
+}
 
 -- the MusicRate Quad and text
 t[#t+1] = Def.ActorFrame{

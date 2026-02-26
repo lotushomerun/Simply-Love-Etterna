@@ -467,8 +467,8 @@ ParseChartInfo = function(steps, pn)
 			-- Parse out just the contents of the notes
 			local chartString, BPMs = GetSimfileChartString(simfileString, stepsType, difficulty, description, fileType)
 			if chartString ~= nil and BPMs ~= nil then
-				-- We use 16 characters for the V3 GrooveStats hash.
-				local Hash = BinaryToHex(CRYPTMAN:SHA1String(chartString..BPMs)):sub(1, 16)
+				-- ET EDIT: Use EO chart key
+				local Hash = steps:GetChartKey()
 
 				-- Check if there is an & present, we're dealing with a couples chart:
 				-- Couples charts have P1 and P2 steps in the same chart string.
@@ -497,13 +497,14 @@ ParseChartInfo = function(steps, pn)
 
 				-- Let's just do this here for now since a lot of the existing infra
 				-- references these values directly. We can refactor later.
-				local techCounts = steps:CalculateTechCounts(player)
-
-				SL[pn].Streams.Crossovers = techCounts:GetValue("TechCountsCategory_Crossovers")
-				SL[pn].Streams.Footswitches = techCounts:GetValue("TechCountsCategory_Footswitches")
-				SL[pn].Streams.Sideswitches = techCounts:GetValue("TechCountsCategory_Sideswitches")
-				SL[pn].Streams.Jacks = techCounts:GetValue("TechCountsCategory_Jacks")
-				SL[pn].Streams.Brackets = techCounts:GetValue("TechCountsCategory_Brackets")
+				SL[pn].Streams.Stream = steps:GetMSD(getCurRateValue(), 2)
+				SL[pn].Streams.Jumpstream = steps:GetMSD(getCurRateValue(), 3)
+				SL[pn].Streams.Handstream = steps:GetMSD(getCurRateValue(), 4)
+				SL[pn].Streams.Stamina = steps:GetMSD(getCurRateValue(), 5)
+				SL[pn].Streams.JackSpeed = steps:GetMSD(getCurRateValue(), 6)
+				SL[pn].Streams.Chordjack = steps:GetMSD(getCurRateValue(), 7)
+				SL[pn].Streams.Technical = steps:GetMSD(getCurRateValue(), 8)
+				SL[pn].Streams.Overall = steps:GetMSD(getCurRateValue(), 1)
 
 				SL[pn].Streams.Filename = filename
 				SL[pn].Streams.StepsType = stepsType
@@ -522,11 +523,14 @@ ParseChartInfo = function(steps, pn)
 			SL[pn].Streams.NPSperMeasure = {}
 			SL[pn].Streams.Hash = ''
 
-			SL[pn].Streams.Crossovers = 0
-			SL[pn].Streams.Footswitches = 0
-			SL[pn].Streams.Sideswitches = 0
-			SL[pn].Streams.Jacks = 0
-			SL[pn].Streams.Brackets = 0
+			SL[pn].Streams.Stream = 0
+			SL[pn].Streams.Jumpstream = 0
+			SL[pn].Streams.Handstream = 0
+			SL[pn].Streams.Stamina = 0
+			SL[pn].Streams.JackSpeed = 0
+			SL[pn].Streams.Chordjack = 0
+			SL[pn].Streams.Technical = 0
+			SL[pn].Streams.Overall = 0
 
 			SL[pn].Streams.Filename = filename
 			SL[pn].Streams.StepsType = stepsType

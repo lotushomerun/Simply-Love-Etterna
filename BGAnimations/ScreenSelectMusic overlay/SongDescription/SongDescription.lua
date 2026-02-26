@@ -147,6 +147,7 @@ af[#af+1] = Def.ActorFrame{
 	-- Song Duration Value
 	LoadFont("Common Normal")..{
 		InitCommand=function(self) self:align(0,0):xy(_w-130 + 5, 10) end,
+		CurrentStepsChangedMessageCommand=function(self) self:playcommand("Set") end,
 		SetCommand=function(self)
 			if MusicWheel == nil then MusicWheel = SCREENMAN:GetTopScreen():GetMusicWheel() end
 
@@ -158,8 +159,9 @@ af[#af+1] = Def.ActorFrame{
 				-- and we're returning to SSM to find that the song we'd just played is no longer available
 				-- because it exceeds the 2-round or 3-round time limit cutoff.
 				local song = GAMESTATE:GetCurrentSong()
-				if song then
-					seconds = song:MusicLengthSeconds()
+				if GAMESTATE:GetCurrentSteps() then
+					-- seconds = song:MusicLengthSeconds()
+					seconds = GetPlayableTime()
 				end
 
 			elseif SelectedType == "WheelItemDataType_Section" then

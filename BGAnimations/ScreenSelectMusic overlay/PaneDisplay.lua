@@ -24,7 +24,7 @@ local GetScoreFromProfile = function(profile, SongOrCourse, StepsOrTrail)
 	-- if we don't have everything we need, return nil
 	if not (profile and SongOrCourse and StepsOrTrail) then return nil end
 
-	return profile:GetHighScoreList(SongOrCourse, StepsOrTrail):GetHighScores()[1]
+	-- return profile:GetHighScoreList(SongOrCourse, StepsOrTrail):GetHighScores()[1]
 end
 
 local GetScoreForPlayer = function(player)
@@ -379,8 +379,8 @@ for player in ivalues(PlayerNumber) do
 	af2.SLGameModeChangedMessageCommand=function(self)              self:playcommand("Set") end
 	af2.CurrentCourseChangedMessageCommand=function(self)			self:playcommand("Set") end
 	af2.CurrentSongChangedMessageCommand=function(self)				self:playcommand("Set") end
-	af2["CurrentSteps"..pn.."ChangedMessageCommand"]=function(self) self:playcommand("Set") end
-	af2["CurrentTrail"..pn.."ChangedMessageCommand"]=function(self) self:playcommand("Set") end
+	af2["CurrentStepsChangedMessageCommand"]=function(self) self:playcommand("Set") end
+	af2["CurrentTrailChangedMessageCommand"]=function(self) self:playcommand("Set") end
 
 	-- -----------------------------------------------------------------------
 	-- colored background Quad
@@ -576,6 +576,7 @@ for player in ivalues(PlayerNumber) do
 		InitCommand=function(self)
 			self:horizalign(right):diffuse(Color.Black)
 			self:xy(pos.col[4], pos.row[2])
+            self:zoom(0.7)
 			if not IsUsingWideScreen() then self:maxwidth(66) end
 			self:queuecommand("Set")
 		end,
@@ -587,7 +588,8 @@ for player in ivalues(PlayerNumber) do
 
 			local SongOrCourse, StepsOrTrail = GetSongAndSteps(player)
 			if not SongOrCourse then self:settext("") return end
-			local meter = StepsOrTrail and StepsOrTrail:GetMeter() or "?"
+			-- local meter = StepsOrTrail and StepsOrTrail:GetMeter() or "?"
+			local meter = StepsOrTrail and string.format("%05.2f", StepsOrTrail:GetMSD(getCurRateValue(), 1)) or "?"
 
 			self:settext( meter )
 		end
