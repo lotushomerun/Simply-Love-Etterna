@@ -170,13 +170,7 @@ Branch.AfterGameplay = function()
 		end
 	end
 
-	return Branch.AfterHeartEntry()
-end
-
-Branch.AfterHeartEntry = function()
-	local pm = ToEnumShortString(GAMESTATE:GetPlayMode())
-	if( pm == "Regular" ) then return "ScreenEvaluationStage" end
-	if( pm == "Nonstop" ) then return "ScreenEvaluationNonstop" end
+	return "ScreenEvaluationStage"
 end
 
 Branch.AfterSelectMusic = function()

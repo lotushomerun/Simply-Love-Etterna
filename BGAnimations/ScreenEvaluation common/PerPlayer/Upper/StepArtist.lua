@@ -1,24 +1,12 @@
 local player = ...
 local info
 
--- in CourseMode, GetStepsCredit() will return a table of info that
--- has as many entries as there are stepcharts in the course
--- (i.e. potentially a lot) so just show course Scripter or Description
-if GAMESTATE:IsCourseMode() then
-	local course = GAMESTATE:GetCurrentCourse()
-	local scripter = course:GetScripter()
-	local descript = course:GetDescription()
-	-- prefer scripter, use description if scripter is empty
-	info = (scripter ~= "" and scripter) or (descript ~= "" and descript) or ""
-
-else
-	info = GetStepsCredit(player)
-end
+info = GetStepsCredit(player)
 
 local marquee_index = 0
 
 return LoadFont("Common Normal")..{
-	InitCommand=function(self) self:zoom(0.7):xy(115,_screen.cy-80) end,
+	InitCommand=function(self) self:zoom(0.7):xy(85,_screen.cy-80) end,
 	OnCommand=function(self)
 		local textColor = Color.White
 		local shadowLength = 0

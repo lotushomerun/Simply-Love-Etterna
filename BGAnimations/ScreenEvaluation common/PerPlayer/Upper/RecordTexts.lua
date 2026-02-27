@@ -16,17 +16,18 @@ local HighScoreIndex = {
 local SongOrCourse = GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentCourse() or GAMESTATE:GetCurrentSong()
 local StepsOrTrail = GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentTrail(player) or GAMESTATE:GetCurrentSteps(player)
 
-local MaxMachineHighScores = PREFSMAN:GetPreference("MaxHighScoresPerListForMachine")
-local MachineHighScores = PROFILEMAN:GetMachineProfile():GetHighScoreList(SongOrCourse,StepsOrTrail):GetHighScores()
+-- local MaxMachineHighScores = PREFSMAN:GetPreference("MaxHighScoresPerListForMachine")
+-- -- local MachineHighScores = PROFILEMAN:GetMachineProfile():GetHighScoreList(SongOrCourse,StepsOrTrail):GetHighScores()
+-- local MachineHighScores = getBestScore(player,0,getCurRate())
 
-local EarnedMachineHighScoreInEventMode = function()
-	-- if no DancePoints were earned, it's not a HighScore
-	if pss:GetPercentDancePoints() <= 0.01 then return false end
-	-- if DancePoints were earned, and no MachineHighScores exist, it's a HighScore
-	if #MachineHighScores < 1 then return true end
-	-- otherwise, check if this score is better than the worst current HighScore retrieved from MachineProfile
-	return pss:GetHighScore():GetPercentDP() >= MachineHighScores[math.min(MaxMachineHighScores, #MachineHighScores)]:GetPercentDP()
-end
+-- local EarnedMachineHighScoreInEventMode = function()
+-- 	-- if no DancePoints were earned, it's not a HighScore
+-- 	if pss:GetPercentDancePoints() <= 0.01 then return false end
+-- 	-- if DancePoints were earned, and no MachineHighScores exist, it's a HighScore
+-- 	if #MachineHighScores < 1 then return true end
+-- 	-- otherwise, check if this score is better than the worst current HighScore retrieved from MachineProfile
+-- 	return pss:GetHighScore():GetPercentDP() >= MachineHighScores[math.min(MaxMachineHighScores, #MachineHighScores)]:GetPercentDP()
+-- end
 
 -- FIXME: This approach is bizarre and heavily flawed + limited.
 --        GetMachineHighScoreIndex() should really be patched in the SM5 engine.
@@ -57,19 +58,20 @@ local MachineHighScoreIndexInEventMode = function()
 end
 
 if GAMESTATE:IsEventMode() then
-	HighScoreIndex.Machine = MachineHighScoreIndexInEventMode()
+	-- HighScoreIndex.Machine = MachineHighScoreIndexInEventMode()
 end
 
 -- ---------------------------------------------
 
-local EarnedMachineRecord  = GAMESTATE:IsEventMode() and EarnedMachineHighScoreInEventMode() or ((HighScoreIndex.Machine ~= -1) and pss:GetPercentDancePoints() >= 0.01)
+-- local EarnedMachineRecord  = GAMESTATE:IsEventMode() and EarnedMachineHighScoreInEventMode() or ((HighScoreIndex.Machine ~= -1) and pss:GetPercentDancePoints() >= 0.01)
 local EarnedPersonalRecord = ( HighScoreIndex.Personal ~= -1 ) and pss:GetPercentDancePoints() >= 0.01
 
 -- ---------------------------------------------
 
 -- this player earned some record and the ability to enter a high score name
 -- we'll check for this flag later in ./BGAnimations/ScreenNameEntryTradtional underlay/default.lua
-if EarnedMachineRecord or EarnedPersonalRecord then
+-- if EarnedMachineRecord or EarnedPersonalRecord then
+if EarnedPersonalRecord then
 	SL[pn].HighScores.EnteringName = true
 end
 

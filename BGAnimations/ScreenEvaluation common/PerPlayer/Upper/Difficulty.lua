@@ -7,7 +7,7 @@ return Def.ActorFrame{
 	LoadFont("Common Normal")..{
 		InitCommand=function(self)
 			self:y(_screen.cy-64)
-			self:x(115 * (player==PLAYER_1 and -1 or 1))
+			self:x(85 * (player==PLAYER_1 and -1 or 1))
 			self:halign(pn):zoom(0.7)
 
 			local textColor = Color.White
@@ -36,9 +36,9 @@ return Def.ActorFrame{
 	-- colored square as the background for the difficulty meter
 	Def.Quad{
 		InitCommand=function(self)
-			self:zoomto(30,30)
+			self:zoomto(60,30)
 			self:y( _screen.cy-71 )
-			self:x(134.5 * (player==PLAYER_1 and -1 or 1))
+			self:x(120 * (player==PLAYER_1 and -1 or 1))
 
 			local currentSteps = GAMESTATE:GetCurrentSteps(player)
 			if currentSteps then
@@ -53,16 +53,11 @@ return Def.ActorFrame{
 		InitCommand=function(self)
 			self:diffuse(Color.Black):zoom( 0.4 )
 			self:y( _screen.cy-71 )
-			self:x(134.5 * (player==PLAYER_1 and -1 or 1))
+			self:x(120 * (player==PLAYER_1 and -1 or 1))
 
 			local meter
-			if GAMESTATE:IsCourseMode() then
-				local trail = GAMESTATE:GetCurrentTrail(player)
-				if trail then meter = trail:GetMeter() end
-			else
-				local steps = GAMESTATE:GetCurrentSteps(player)
-				if steps then meter = steps:GetMeter() end
-			end
+			local steps = GAMESTATE:GetCurrentSteps(player)
+			if steps then meter = string.format("%05.2f", steps:GetMSD(getCurRateValue(), 1)) end
 
 			if meter then self:settext(meter) end
 		end

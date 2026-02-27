@@ -39,11 +39,21 @@ return Def.ActorFrame{
 
 	LoadFont("Wendy/_wendy white")..{
 		Name="Percent",
-		Text=("%.2f"):format(percent),
+		Text="0.00",
 		InitCommand=function(self)
 			self:horizalign(right):zoom(0.585)
 			self:x( (controller == PLAYER_1 and 1.5 or 141))
 			self:diffuse(diffuse)
-		end
+			self:playcommand("Set")
+		end,
+		SetCommand = function(self, params)
+			local score = STATSMAN:GetCurStageStats():GetPlayerStageStats(player):GetWifeScore()*100
+			if score >= 99.0 then
+				self:horizalign(right):zoom(0.4)
+				self:settext(string.format("%05.5f",score))
+			else
+				self:settext(string.format("%05.2f",score))
+			end
+		end,
 	}
 }

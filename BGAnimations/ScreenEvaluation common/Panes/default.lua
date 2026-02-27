@@ -17,6 +17,7 @@ if #players == 2 or SL.Global.GameMode=="Casual" then
 	for player in ivalues(players) do
 		-- add Panes for this player to the ActorFrame using a simple, numerical for-loop
 		for i=1, NumPanes do
+			if i == 7 then i=i+1 end
 			local pn   = ToEnumShortString(player)
 			local pane = LoadActor("./Pane"..i, {player, player})
 

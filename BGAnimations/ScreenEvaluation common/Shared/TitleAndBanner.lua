@@ -14,17 +14,17 @@ local af = Def.ActorFrame{ InitCommand=function(self) self:xy(_screen.cx, y_offs
 
 if SongOrCourse and SongOrCourse:HasBanner() then
 	--song or course banner, if there is one
-	af[#af+1] = Def.Banner{
-		Name="Banner",
-		InitCommand=function(self)
-			if GAMESTATE:IsCourseMode() then
-				self:LoadFromCourse( GAMESTATE:GetCurrentCourse() ):animate(false)
-			else
-				self:LoadFromSong( GAMESTATE:GetCurrentSong() ):animate(false)
-			end
-			self:y(66):setsize(banner.width, 164):zoom(banner.zoom)
-		end,
-	}
+	-- af[#af+1] = Def.Banner{
+	-- 	Name="Banner",
+	-- 	InitCommand=function(self)
+	-- 		if GAMESTATE:IsCourseMode() then
+	-- 			self:LoadFromCourse( GAMESTATE:GetCurrentCourse() ):animate(false)
+	-- 		else
+	-- 			self:LoadFromSong( GAMESTATE:GetCurrentSong() ):animate(false)
+	-- 		end
+	-- 		self:y(66):setsize(banner.width, 164):zoom(banner.zoom)
+	-- 	end,
+	-- }
 else
 	--fallback banner
 	af[#af+1] = LoadActor(GetFallbackBanner())..{

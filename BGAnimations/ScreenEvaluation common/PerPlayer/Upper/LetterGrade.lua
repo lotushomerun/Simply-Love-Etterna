@@ -1,7 +1,8 @@
 local player = ...
 
 local playerStats = STATSMAN:GetCurStageStats():GetPlayerStageStats(player)
-local grade = playerStats:GetGrade()
+local grade = GetGradeFromPercent(playerStats:GetWifeScore())
+if playerStats:GetGrade() == "Grade_Failed" then grade = "Grade_Failed" end
 
 -- "I passd with a q though."
 local title = GAMESTATE:GetCurrentSong():GetDisplayFullTitle()
