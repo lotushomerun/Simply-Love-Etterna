@@ -133,6 +133,14 @@ return LoadFont("Wendy/_wendy monospace numbers")..{
 		-- local dance_points = pss:GetPercentDancePoints()
 		local percent = msg.WifePercent
 		self:settext(string.format("%03.2f",percent))
+		-- ET EDIT: autoplay puts the wife score in the MASSIVE negatives that overflow.
+		-- this is fine in some themes like Rebirth and SKWH where the percentage isn't right next to another element.
+		-- color the percentage red to reflect this. 
+		-- -800 is the worst legitimate score possible which you can get by just missing every note
+		if percent < -800 then
+			self:settext(string.format("%03.2f",-99.99))
+			self:diffuse(255,0,0,255)
+		end
 	end,
 	-- RedrawScoreCommand=function(self)
 	-- 	if not IsEX then

@@ -130,7 +130,8 @@ for player in ivalues( GAMESTATE:GetHumanPlayers() ) do
 				self:zoom(0.4)
 			else
 				-- if this OptionRow doesn't need an ActorProxy, don't draw it and save processor cycles
-				self:hibernate(math.huge)
+				self:visible(false)
+				-- self:hibernate(math.huge)
 			end
 		end
 	}
@@ -155,6 +156,7 @@ for player in ivalues( GAMESTATE:GetHumanPlayers() ) do
 				offscreen_actor_name = ("%s_%s"):format(params.Name, params.Value)
 			end
 			-- attempt to find the offscreen actor added by ./BGAnimations/ScreenPlayerOptions overlay.lua
+			-- print(offscreen_actor_name)
 			local offscreen_actor = SCREENMAN:GetTopScreen():GetChild("Overlay"):GetChild(offscreen_actor_name)
 			-- ensure that that actor exists before attempting to set it as the target of this ActorProxy
 			if offscreen_actor then self:SetTarget( offscreen_actor ) end

@@ -205,32 +205,6 @@ local Overrides = {
 			playeroptions:NoteSkin( mods.NoteSkin )
 		end
 	},
-	NoteSkinVariant = {
-		ExportOnChange = true,
-		LayoutType = "ShowOneInRow",
-		Choices = { "       " },
-		EnabledForPlayers = function() 
-			local players = {}
-			for player in ivalues(GAMESTATE:GetHumanPlayers()) do
-				local variant = SL[ToEnumShortString(player)].ActiveModifiers.NoteSkinVariant
-				local noteskin = SL[ToEnumShortString(player)].ActiveModifiers.NoteSkin
-				if (noteskin and NOTESKIN:HasVariants(noteskin)) then
-					players[#players+1] = player
-				end
-			end
-			return players 
-		end,
-		ReloadRowMessages = { "RefreshActorProxy" },
-		SaveSelections = function(self, list, pn)
-			local mods, playeroptions = GetModsAndPlayerOptions(pn)
-			local variant = mods.NoteSkinVariant
-			if variant then
-				-- Broadcast a message that ./Graphics/OptionRow Frame.lua will be listening for so it can change the NoteSkin preview
-				MESSAGEMAN:Broadcast("RefreshActorProxy", {Player=pn, Name="NoteSkinVariant", Value=mods.NoteSkinVariant})
-				playeroptions:NoteSkin( mods.NoteSkinVariant )
-			end
-		end
-	},
 	-------------------------------------------------------------------------
 	JudgmentGraphic = {
 		LayoutType = "ShowOneInRow",
@@ -359,7 +333,7 @@ local Overrides = {
 				local song = GAMESTATE:GetCurrentSong()
 				if song then
 					for steps in ivalues( SongUtil.GetPlayableSteps(song) ) do
-						if steps:IsAnEdit() then
+						if steps:GetDifficulty() == "Difficulty_Edit" then
 							choices[#choices+1] = ("%s %i"):format(steps:GetDescription(), steps:GetMeter())
 						else
 							choices[#choices+1] = ("%s %i"):format(THEME:GetString("Difficulty", ToEnumShortString(steps:GetDifficulty())), steps:GetMeter())
@@ -523,7 +497,7 @@ local Overrides = {
 		Values = function()
 			local t = {}
 			-- "GradeTier16" to "GradeTier01"
-			for i=16,1,-1 do
+			for i=15,1,-1 do
 				table.insert(t, ("GradeTier%02d"):format(i))
 			end
 			table.insert(t, "Machine best")
@@ -903,8 +877,6 @@ local OptionRowDefault = {
 			self.SelectType = Overrides[name].SelectType or "SelectOne"
 			self.OneChoiceForAllPlayers = Overrides[name].OneChoiceForAllPlayers or false
 			self.ExportOnChange = Overrides[name].ExportOnChange or false
-			-- self.EnabledForPlayers = Overrides[name].EnabledForPlayers or function() return {PLAYER_1, PLAYER_2} end
-			self.EnabledForPlayers = {PLAYER_1}
 			self.ReloadRowMessages = Overrides[name].ReloadRowMessages or {}
 			self.BroadcastOnExport = Overrides[name].BroadcastOnExport or {}
 			

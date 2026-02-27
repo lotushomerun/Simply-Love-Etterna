@@ -20,7 +20,7 @@ bg[#bg+1] = Def.Quad{
 
 -- adds alternating grey-black bars to represent each grade
 -- (A-, A, A+, etc)
-for i=1,16 do
+for i=1,15 do
 	local tierStart = THEME:GetMetric("PlayerStageStats", "GradePercentTier" .. string.format("%02d", i))
 	local tierEnd = THEME:GetMetric("PlayerStageStats", "GradePercentTier" .. string.format("%02d", i+1))
 	local yStart = percentToYCoordinate(tierStart)
@@ -48,8 +48,8 @@ end
 -- this file to load once and handle [one, the other, both players] within.
 
 -- grades for which we should draw a border/label
-local gradeBorders = { 2, 3, 4, 7, 10, 13, 16 }
-local gradeNames = {"☆☆☆", "☆☆", "☆", "S", "A", "B", "C"}
+local gradeBorders = { 7, 9, 10, 13, 14, 15, 16 }
+local gradeNames = {"AAA", "AA.", "AA", "A", "B", "C", "D"}
 
 -- draws a horizontal line and a label at every major grade border
 for i = 1,#gradeBorders do

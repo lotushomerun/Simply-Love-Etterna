@@ -8,24 +8,24 @@ local GetTopScore = function(kind)
 
 	local SongOrCourse, StepsOrTrail, scorelist
 
-	if GAMESTATE:IsCourseMode() then
-		SongOrCourse = GAMESTATE:GetCurrentCourse()
-		StepsOrTrail = GAMESTATE:GetCurrentTrail(player)
-	else
-		SongOrCourse = GAMESTATE:GetCurrentSong()
-		StepsOrTrail = GAMESTATE:GetCurrentSteps(player)
-	end
+	-- if GAMESTATE:IsCourseMode() then
+	-- 	SongOrCourse = GAMESTATE:GetCurrentCourse()
+	-- 	StepsOrTrail = GAMESTATE:GetCurrentTrail(player)
+	-- else
+	-- 	SongOrCourse = GAMESTATE:GetCurrentSong()
+	-- 	StepsOrTrail = GAMESTATE:GetCurrentSteps(player)
+	-- end
 
-	if kind == "Machine" then
-		scorelist = PROFILEMAN:GetMachineProfile():GetHighScoreList(SongOrCourse,StepsOrTrail)
-	elseif kind == "Personal" then
-		scorelist = PROFILEMAN:GetProfile(player):GetHighScoreList(SongOrCourse,StepsOrTrail)
-	end
+	-- if kind == "Machine" then
+	-- 	scorelist = PROFILEMAN:GetMachineProfile():GetHighScoreList(SongOrCourse,StepsOrTrail)
+	-- elseif kind == "Personal" then
+	-- 	scorelist = PROFILEMAN:GetProfile(player):GetHighScoreList(SongOrCourse,StepsOrTrail)
+	-- end
 
-	if scorelist then
-		local topscore = scorelist:GetHighScores()[1]
-		if topscore then return topscore:GetPercentDP() end
-	end
+	-- if scorelist then
+	-- 	local topscore = scorelist:GetHighScores()[1]
+	-- 	if topscore then return topscore:GetPercentDP() end
+	-- end
 
 	return 0
 end
@@ -115,7 +115,7 @@ elseif (target_grade_index == 18) then
 else
 	-- player set TargetGrade as a particular letter grade
 	-- anything from C- to ☆☆☆☆
-	target_grade_score = THEME:GetMetric("PlayerStageStats", "GradePercentTier" .. string.format("%02d", 17 - target_grade_index))
+	target_grade_score = THEME:GetMetric("PlayerStageStats", "GradePercentTier" .. string.format("%02d", 16 - target_grade_index))
 end
 
 -- if there is no personal/machine score, default to S as target

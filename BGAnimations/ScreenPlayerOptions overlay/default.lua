@@ -11,8 +11,8 @@
 
 local speedmod_def = {
 	X = { upper=20,   increment=0.05 },
-	C = { upper=2000, increment=5 },
-	M = { upper=2000, increment=5 }
+	C = { upper=2000, increment=25 },
+	M = { upper=2000, increment=25 }
 }
 
 local variants_def = {}
@@ -20,13 +20,14 @@ for player in ivalues( GAMESTATE:GetHumanPlayers() ) do
 	local pn = ToEnumShortString(player)
 	local noteskin_name = SL[pn].ActiveModifiers.NoteSkin
 	if noteskin_name then
-		if NOTESKIN:HasVariants(noteskin_name) then
-			variants_def[pn] = NOTESKIN:GetVariantNamesForNoteSkin(noteskin_name)
-			-- Put the current NoteSkin at the front of the list of variants so that it's the default selection when we refresh the OptionRow
-			table.insert(variants_def[pn], 1, noteskin_name)
-		else
-			variants_def[pn] = {noteskin_name}
-		end
+		-- if NOTESKIN:HasVariants(noteskin_name) then
+		-- 	variants_def[pn] = NOTESKIN:GetVariantNamesForNoteSkin(noteskin_name)
+		-- 	-- Put the current NoteSkin at the front of the list of variants so that it's the default selection when we refresh the OptionRow
+		-- 	table.insert(variants_def[pn], 1, noteskin_name)
+		-- else
+		-- 	variants_def[pn] = {noteskin_name}
+		-- end
+		variants_def[pn] = {noteskin_name}
 	end
 end
 
@@ -116,13 +117,15 @@ local ChangeVariant = function(pn, direction)
 	local ScreenOptions = SCREENMAN:GetTopScreen()
 	if direction == 0 then
 		local noteskin_name = SL[pn].ActiveModifiers.NoteSkin
-		if NOTESKIN:HasVariants(noteskin_name) then
-			variants_def[pn] = NOTESKIN:GetVariantNamesForNoteSkin(noteskin_name)
-			-- Put the current NoteSkin at the front of the list of variants so that it's the default selection when we refresh the OptionRow
-			table.insert(variants_def[pn], 1, noteskin_name)
-		else
-			variants_def[pn] = {noteskin_name}
-		end
+		-- if NOTESKIN:HasVariants(noteskin_name) then
+		-- 	variants_def[pn] = NOTESKIN:GetVariantNamesForNoteSkin(noteskin_name)
+		-- 	-- Put the current NoteSkin at the front of the list of variants so that it's the default selection when we refresh the OptionRow
+		-- 	table.insert(variants_def[pn], 1, noteskin_name)
+		-- else
+		-- 	variants_def[pn] = {noteskin_name}
+		-- end
+		variants_def[pn] = {noteskin_name}
+
 	end
 	local current_variant = SL[pn].ActiveModifiers.NoteSkinVariant or SL[pn].ActiveModifiers.NoteSkin
 	local variants = variants_def[pn] or {current_variant}
@@ -159,14 +162,19 @@ local t = Def.ActorFrame{
 			local VariantRowIndex = FindOptionRowIndex(ScreenOptions,"NoteSkinVariant")
 			if SpeedModRowIndex then
 				-- The BitmapText actors for P1 and P2 speedmod are both named "Item", so we need to provide a 1 or 2 to index
+				
+				for i=0, entry in ipairs(GAMESTATE:GetHumanPlayers()) do
+					print(entry[i])
+				-- print(#ScreenOptions:GetOptionRow(SpeedModRowIndex))
+				end
 				SpeedModBMTs[pn] = ScreenOptions:GetOptionRow(SpeedModRowIndex):GetChild(""):GetChild("Item")[ PlayerNumber:Reverse()[player]+1 ]
 				self:playcommand("Set"..pn)
 			end
-			if VariantRowIndex then
-				-- The BitmapText actors for P1 and P2 variant are both named "Item", so we need to provide a 1 or 2 to index
-				VariantBMTs[pn] = ScreenOptions:GetOptionRow(VariantRowIndex):GetChild(""):GetChild("Item")[ PlayerNumber:Reverse()[player]+1 ]
-				self:queuecommand("Set"..pn.."Variant")
-			end
+			-- if VariantRowIndex then
+			-- 	-- The BitmapText actors for P1 and P2 variant are both named "Item", so we need to provide a 1 or 2 to index
+			-- 	VariantBMTs[pn] = ScreenOptions:GetOptionRow(VariantRowIndex):GetChild(""):GetChild("Item")[ PlayerNumber:Reverse()[player]+1 ]
+			-- 	self:queuecommand("Set"..pn.."Variant")
+			-- end
 		end
 	end,
 	MusicRateChangedMessageCommand=function(self)
@@ -227,7 +235,7 @@ local t = Def.ActorFrame{
 -- this overlay ActorFrame; they'll each be hidden immediately via visible(false)
 -- and referred to as needed via ActorProxy in ./Graphics/OptionRow Frame.lua
 LoadActor("./OptionRowPreviews/NoteSkin.lua", t)
-LoadActor("./OptionRowPreviews/NoteSkinVariant.lua", t)
+-- LoadActor("./OptionRowPreviews/NoteSkinVariant.lua", t)
 LoadActor("./OptionRowPreviews/JudgmentGraphic.lua", t)
 LoadActor("./OptionRowPreviews/ComboFont.lua", t)
 LoadActor("./OptionRowPreviews/HoldJudgment.lua", t)
@@ -290,17 +298,17 @@ for player in ivalues(GAMESTATE:GetHumanPlayers()) do
 			elseif  SL[pn].ActiveModifiers.SpeedModType == "M" then
 				text = "M" .. tostring(SL[pn].ActiveModifiers.SpeedMod)
 			end
-
+			print(text)
 			SpeedModBMTs[pn]:settext( text )
 			self:GetParent():queuecommand("Refresh")
 		end,
-		["Set" .. pn .. "VariantCommand"]=function(self)
-			local current_variant = SL[pn].ActiveModifiers.NoteSkinVariant or SL[pn].ActiveModifiers.NoteSkin
-			-- Get all text after first _ to get the variant name
-			current_variant = current_variant:match("_(.*)") or current_variant
-			VariantBMTs[pn]:settext( current_variant )
-			self:GetParent():queuecommand("RefreshVariants")
-		end,
+		-- ["Set" .. pn .. "VariantCommand"]=function(self)
+		-- 	local current_variant = SL[pn].ActiveModifiers.NoteSkinVariant or SL[pn].ActiveModifiers.NoteSkin
+		-- 	-- Get all text after first _ to get the variant name
+		-- 	current_variant = current_variant:match("_(.*)") or current_variant
+		-- 	VariantBMTs[pn]:settext( current_variant )
+		-- 	self:GetParent():queuecommand("RefreshVariants")
+		-- end,
 
 		["CurrentSteps" .. pn .. "ChangedMessageCommand"]=function(self) self:queuecommand("Set"..pn) end,
 		["CurrentTrail" .. pn .. "ChangedMessageCommand"]=function(self) self:queuecommand("Set"..pn) end,

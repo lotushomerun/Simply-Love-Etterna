@@ -40,12 +40,12 @@ return function(AllSteps)
 		-- there are edit stepcharts available for the current song
 		-- but this player's current steps aren't an edit, so they are
 		-- presumably looking at the normal (Beginner - Expert) range
-		if not currentSteps:IsAnEdit() then return StepsToShow end
+		if not currentSteps:GetDifficulty() == "Difficulty_Edit" then return StepsToShow end
 
 	-- both players are joined
 	else
 		-- but neither players' steps is an edit
-		if not GAMESTATE:GetCurrentSteps(PLAYER_1):IsAnEdit() and not GAMESTATE:GetCurrentSteps(PLAYER_2):IsAnEdit() then
+		if not GAMESTATE:GetCurrentSteps(PLAYER_1):GetDifficulty() == "Difficulty_Edit" and not GAMESTATE:GetCurrentSteps(PLAYER_2):GetDifficulty() == "Difficulty_Edit" then
 			-- so just return the "normal" stepcharts
 			return StepsToShow
 		end

@@ -121,6 +121,45 @@ if not GAMESTATE:IsCourseMode() then
 			end
 		end
 	}
+	t[#t+1] = Def.ActorFrame {
+		OnCommand=function(self)
+			self:draworder(102)
+			self:playcommand("SetCD")
+		end,
+		OffCommand=function(self)
+			self:bouncebegin(0.15)
+		end,
+		CurrentSongChangedMessageCommand=function(self) self:playcommand("SetCD") end,
+		SwitchFocusToGroupsMessageCommand=function(self) self:GetChild("CdTitle"):visible(false) end,
+		LoadFont("Common Normal")..{
+			SetCDCommand=function(self)
+			SongOrCourse = GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentCourse() or GAMESTATE:GetCurrentSong()
+			if SongOrCourse then
+				local cred = GAMESTATE:GetCurrentSong():GetOrTryAtLeastToGetSimfileAuthor()
+				if cred ~= "" and cred ~= "Author Unknown" then
+					self:visible(true)
+					self:settext(GAMESTATE:GetCurrentSong():GetOrTryAtLeastToGetSimfileAuthor())
+					local dim1, dim2 = math.max(self:GetWidth(), self:GetHeight()), math.min(self:GetWidth(), self:GetHeight())
+					local ratio = math.max(dim1 / dim2, 2.5)
+
+					local toScale = self:GetWidth() > self:GetHeight() and self:GetWidth() or self:GetHeight()
+					if SongOrCourse:HasCDTitle() then
+						self:xy((bannerWidth - 30) / 2, (bannerHeight + 50)/ 2)
+						self:zoom(15 / toScale * ratio)
+					else
+						self:xy((bannerWidth - 30) / 2, (bannerHeight - 10)/ 2)
+						self:zoom(15 / toScale * ratio)
+					end
+					self:finishtweening():addrotationy(0):linear(.5):addrotationy(360)
+				else
+					self:visible(false)
+				end
+			else
+				self:visible(false)
+			end
+		end
+		}
+	}
 end
 
 return t

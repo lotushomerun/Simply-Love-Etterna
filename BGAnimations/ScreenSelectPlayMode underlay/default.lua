@@ -39,7 +39,7 @@ local InputHandler = function(event)
 			if ScreenName=="ScreenSelectPlayMode" or ScreenName=="ScreenSelectPlayModeThonk" then
 				SL.Global.GameMode = choices[cursor.index+1]
 				-- now that a GameMode has been selected, set related preferences
-				-- SetGameModePreferences()
+				SetGameModePreferences()
 				-- and reload the theme's Metrics
 				THEME:ReloadMetrics()
 				SCREENMAN:GetTopScreen():StartTransitioningScreen("SM_GoToNextScreen")

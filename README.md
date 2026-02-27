@@ -28,9 +28,10 @@ The current release of Simply Love is compatible with current Etterna versions *
 
 **Alternative Versions**<br>
 - **Etterna**: *You are here*
-- **OutFox**: https://github.com/Tiny-Foxes/Simply-Love-OutFox
-- **ITGMania**: 
-- **StepMania 5**: 
+- **OutFox**: https://github.com/Horsey-/Horseys-Simply-Love
+  - A more faithful port of Simply Love for Outfox: https://github.com/Tiny-Foxes/Simply-Love-OutFox
+- **ITGMania**: ITGMania is the primary Stepmania fork that Simply Love is devleoped for. Use the upstream repo.
+- **StepMania 5**: Use the upstream repo with the `beta` branch
 
 
 ## Installing Simply Love
